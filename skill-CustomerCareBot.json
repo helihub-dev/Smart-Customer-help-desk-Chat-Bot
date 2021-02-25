@@ -1,0 +1,496 @@
+{
+  "intents": [
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "what's up"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hola"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "where are you located"
+        },
+        {
+          "text": "what is your location"
+        },
+        {
+          "text": "location"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "workhours",
+      "examples": [
+        {
+          "text": "working hours"
+        },
+        {
+          "text": "what are your working hours"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "product_info",
+      "examples": [
+        {
+          "text": "how do i set time"
+        },
+        {
+          "text": "How to turn on the heater?"
+        },
+        {
+          "text": "How do i set time?"
+        },
+        {
+          "text": "how to turn on the heater"
+        },
+        {
+          "text": "How do i access settings?"
+        },
+        {
+          "text": "how do i access settings"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Regards",
+      "examples": [
+        {
+          "text": "Awesome job, thanks for the help!"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Regards",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "thanks",
+          "synonyms": [
+            "thank",
+            "thankyou",
+            "thanx",
+            "thx",
+            "cheers",
+            "kudos"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "love ya",
+          "synonyms": [
+            "love you ",
+            "love ",
+            "heart you",
+            "loved",
+            "adore",
+            "awesome",
+            "wonderful"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "bye",
+          "synonyms": [
+            "goodbye",
+            "ciao",
+            "byes",
+            "cheerio",
+            "alright",
+            "farewell",
+            "cya"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greetings",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "gm",
+            "gud mrng",
+            "gud morning",
+            "morning",
+            "chrsyler",
+            "transgenic",
+            "chrysler"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good afternoon",
+          "synonyms": [
+            "gud afternoon",
+            "ga"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good evening",
+          "synonyms": [
+            "ge",
+            "gud eve",
+            "good eve"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/cyrusgandhi%40yahoo.com_dev/default/IntelligentCustomerCareBot%20Hit.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "\"<?$webhook_result_1.passages[0].passage_text?>\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1589635946156",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_7_1589636700469"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "This is a CustomerCareBot, what could i do for you this gratifying afternoon?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1589378581297",
+      "conditions": "@greetings:(good afternoon)",
+      "dialog_node": "response_9_1589526308461",
+      "previous_sibling": "response_9_1589379617447"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "This is a CustomerCareBot, what could i do for you this salubrious evening??"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1589378581297",
+      "conditions": "@greetings:(good evening)",
+      "dialog_node": "response_7_1589535059173",
+      "previous_sibling": "response_9_1589526308461"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Kon'nichiwa! That's hello in Japanese! This is a CustomerCareBot! How may i help you?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_8_1589378581297",
+      "conditions": "#greetings",
+      "dialog_node": "response_9_1589535277421",
+      "previous_sibling": "response_7_1589535059173"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "This is a CustomerCareBot, what could i do for you this pleasant morning?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1589378581297",
+      "conditions": "@greetings:(good morning)",
+      "dialog_node": "response_9_1589379617447"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "We hope we solved all your queries! Feel free to reach out to us again. Have a magnificent day! "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1590747859755",
+      "conditions": "@Regards:thanks",
+      "dialog_node": "response_2_1590749548409",
+      "previous_sibling": "response_6_1590748207141"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Ahhhhhhhh! you made me forget my reply, but here's a poem for you: Roses are red, Violets are blue. Pucker up sweet lips i'm gonna kiss you! "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1590747859755",
+      "conditions": "@Regards:(love ya)",
+      "dialog_node": "response_5_1590749679331",
+      "previous_sibling": "response_9_1590749653353"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "We hope we solved all your queries! Feel free to reach out to us again. Have a magnificent day! "
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1590747859755",
+      "conditions": "@Regards:bye",
+      "dialog_node": "response_9_1590749653353",
+      "previous_sibling": "response_2_1590749548409"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Great to hear that! and feel free to reach out to us again. Have a magnificent day! "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1590747859755",
+      "conditions": "#Regards",
+      "dialog_node": "response_6_1590748207141"
+    },
+    {
+      "type": "standard",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Regards || @Regards",
+      "dialog_node": "node_3_1590747859755",
+      "previous_sibling": "node_10_1589635946156"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "We are open from 9 AM to 10 PM on Monday to Friday "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#workhours",
+      "dialog_node": "node_6_1590751211003",
+      "previous_sibling": "node_7_1590750846743"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "We are located at Brejain's street, California. For more detailed address refer our website and it will direct you to google maps."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#location",
+      "dialog_node": "node_7_1590750846743",
+      "previous_sibling": "node_8_1589378581297"
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#product_info",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_10_1589635946156",
+      "previous_sibling": "node_6_1590751211003"
+    },
+    {
+      "type": "standard",
+      "title": "greetings",
+      "metadata": {
+        "callout": {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "url": ""
+          },
+          "result_variable": "webhook_result_1"
+        },
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings || @greetings",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1589378581297",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              },
+              {
+                "text": "Oops! Try asking something else or try again later!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_3_1590747859755",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "CustomerCareBot",
+  "language": "en",
+  "description": ""
+}

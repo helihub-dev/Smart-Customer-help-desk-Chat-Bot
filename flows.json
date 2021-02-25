@@ -1,0 +1,224 @@
+[
+    {
+        "id": "b52c2ffb.19a88",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7b79a485.ff7c6c",
+        "type": "function",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "func": "msg.payload=\"Hi \" + msg.payload.name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "2fc8071c.da2be8"
+            ]
+        ]
+    },
+    {
+        "id": "93ead6b3.f58628",
+        "type": "function",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "func": "msg.payload = msg.payload.output.text[0];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "86c5cc67.ef8a9"
+            ]
+        ]
+    },
+    {
+        "id": "ec1fcea.c0b953",
+        "type": "debug",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 570,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c6dac7e6.6b82d8",
+        "type": "function",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "func": "msg.payload=msg.payload.text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "89ea37f3.059d28"
+            ]
+        ]
+    },
+    {
+        "id": "2fc8071c.da2be8",
+        "type": "ui_text",
+        "z": "b52c2ffb.19a88",
+        "group": "834247f6.a44c08",
+        "order": 1,
+        "width": "13",
+        "height": "1",
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 330,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "86c5cc67.ef8a9",
+        "type": "ui_text",
+        "z": "b52c2ffb.19a88",
+        "group": "834247f6.a44c08",
+        "order": 2,
+        "width": "11",
+        "height": "5",
+        "name": "",
+        "label": "Your enquiry output:     ",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "858d38a.18dbbc8",
+        "type": "ui_form",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "label": "",
+        "group": "911f2ead.9b0ac",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Greetings, may i know your name?",
+                "value": "name",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "name": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 70,
+        "y": 360,
+        "wires": [
+            [
+                "7b79a485.ff7c6c"
+            ]
+        ]
+    },
+    {
+        "id": "ca55e6ed.fa8d88",
+        "type": "ui_form",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "label": "",
+        "group": "911f2ead.9b0ac",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Post your enquiry here:",
+                "value": "text",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "text": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 70,
+        "y": 280,
+        "wires": [
+            [
+                "c6dac7e6.6b82d8"
+            ]
+        ]
+    },
+    {
+        "id": "89ea37f3.059d28",
+        "type": "watson-conversation-v1",
+        "z": "b52c2ffb.19a88",
+        "name": "",
+        "workspaceid": "2e9422c6-b0e1-4d7b-b55a-75712062f002",
+        "multiuser": false,
+        "context": true,
+        "empty-payload": false,
+        "service-endpoint": "https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/9a5361a7-6db4-4cd4-aa48-6782c2a38306/v1/workspaces/2e9422c6-b0e1-4d7b-b55a-75712062f002/message",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "93ead6b3.f58628",
+                "ec1fcea.c0b953"
+            ]
+        ]
+    },
+    {
+        "id": "834247f6.a44c08",
+        "type": "ui_group",
+        "z": 0,
+        "name": "Bot",
+        "tab": "5b0ec90d.7e6008",
+        "order": 2,
+        "disp": true,
+        "width": "13",
+        "collapse": false
+    },
+    {
+        "id": "911f2ead.9b0ac",
+        "type": "ui_group",
+        "z": 0,
+        "name": "You",
+        "tab": "5b0ec90d.7e6008",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5b0ec90d.7e6008",
+        "type": "ui_tab",
+        "z": 0,
+        "name": "Intelligent Customer Help Desk",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
